@@ -2,7 +2,7 @@
 var myMap = L.map("map", {
     center: [37.60, -95.6650],
     zoom: 10
-  });
+});
   
   // Adding tile layer
   L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -17,11 +17,11 @@ var myMap = L.map("map", {
   // Use this link to get the geojson data.
   var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
   
- 
+
   // Grabbing our GeoJSON data..
   d3.json(link).then(function(data) {
     // Creating a geoJSON layer with the retrieved data
     console.log (data);
-    }).addTo(myMap);
   });
+
   
