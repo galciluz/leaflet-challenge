@@ -77,7 +77,7 @@ function createMap(earthquakes) {
   var overlayMaps = {
     Earthquakes: earthquakes
   };
-
+  
   // Create our map, giving it the streetmap and earthquakes layers to display on load
   var myMap = L.map("map", {
     center: [
@@ -93,4 +93,25 @@ function createMap(earthquakes) {
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
   }).addTo(myMap);
+
+  // Legends
+  var legend = L.control({position: 'bottomright'});
+  legend.onAdd = function() {
+      var div = L.DomUtil.create('div', 'info legend');
+      var grades = [-10,10,30,50,70,90,90];
+      var labels = [];
+      var from;
+      var to;
+
+      for (var i = 0; i < grades.length; i++) {
+        from = grades[i];
+        to = grades[i + 1];
+        div.innerHTML +=
+              '<i style="background:' + chooseColor(from + 1) + '"></i> ' +
+              from + (to ? '&ndash;' + to : '+') + '<p>';
+      }
+      div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+      return div;
+  };
+  legend.addTo(myMap);
 }
